@@ -1,9 +1,12 @@
-import express from 'express'
-import { googleAuth, logout, getMe } from '../controllers/authControllers.js'
-const router = express.Router();
+import {Router} from 'express'
+import { register, login, logout, me } from '../controllers/authControllers.js'
+import { authMiddleware } from '../middleware/authMiddleware.js';
 
-router.get('/me', getMe)
-router.post('/google', googleAuth)
+const router = Router();
+
+router.get('/me',authMiddleware,me)
+router.post('/register', register)
+router.post('/login', login)
 router.post('/logout', logout)
 
 
